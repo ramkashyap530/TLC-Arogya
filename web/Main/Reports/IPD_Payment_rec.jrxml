@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="IPD_Payment_rec" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8a465670-cc4a-4270-965f-8efb86e33b71">
+	<property name="template.engine" value="tabular_template"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Agrogya"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="Table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<leftPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+			<rightPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="tableDataset" uuid="f89e18ae-1ba1-4906-84df-8a7b6a41d045">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="Patient_id" class="java.lang.String"/>
+	<parameter name="Voc_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[
+  select isnull(ipp.patient_id,'')as patient_name,
+  isnull(amount,'')as amount,
+  isnull(dbo.GET_NUM2WORD(amount),'')as in_word,
+  isnull(format(payment_date,'dd/MM/yy'),'')as payment_date,
+  isnull(taken_by,'')as taken_by,
+  isnull(voucher_id,'')as voucher_id,
+  isnull(remark,'')as remark,
+  isnull(paytype,'')as paytype,
+  isnull(cheque_number,'')as cheque_number,
+  isnull(card_number,'')as card_number,
+  isnull(upi_type,'')as upi_type,
+  isnull(transcation_id,'')as transcation_id,
+  isnull(mip.UHID,'')as uhid,
+  isnull(mip.age,'')as age,
+  isnull(mip.gender,'')as gender,
+  isnull(mh.hospital_name,'')as hospital_name,
+  isnull(mh.address,'')as hos_address,
+  isnull(mh.hospital_gst,'')gst,
+  isnull(mh.hospital_registration,'')as reg,
+  isnull(mh.number_1,'')as number_1,
+  isnull(mh.number_2,'')as number_2,
+  isnull(mh.number_3,'')as number_2,
+  isnull(lf.Real_Name,'')as real_name,
+  isnull(mip.ipd_no,'')as ipd_No,
+  isnull(recieved_from,'')as recieved_from,
+  isnull(concat(md.doc_name_first,' ', md.doc_name_last),'')as doc_name
+  from ipd_patient_payment ipp inner join mst_ipd_patient mip on mip.patient_id=ipp.patient_id 
+  inner join mst_hospital mh on mip.hospital_code=mh.hospital_code
+  inner join mst_doctor md on mip.doctor_id=md.Doc_code
+  inner join login_info lf on lf.user_id=ipp.taken_by
+
+
+  where ipp.patient_id=$P{Patient_id} 
+  and ipp.voucher_id=$P{Voc_id}  
+
+
+
+ ]]>
+	</queryString>
+	<field name="patient_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="patient_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="patient_name"/>
+	</field>
+	<field name="amount" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="amount"/>
+	</field>
+	<field name="in_word" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="in_word"/>
+		<property name="com.jaspersoft.studio.field.label" value="in_word"/>
+	</field>
+	<field name="payment_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="payment_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="payment_date"/>
+	</field>
+	<field name="taken_by" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="taken_by"/>
+		<property name="com.jaspersoft.studio.field.label" value="taken_by"/>
+	</field>
+	<field name="voucher_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="voucher_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="voucher_id"/>
+	</field>
+	<field name="remark" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="remark"/>
+		<property name="com.jaspersoft.studio.field.label" value="remark"/>
+	</field>
+	<field name="paytype" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="paytype"/>
+		<property name="com.jaspersoft.studio.field.label" value="paytype"/>
+	</field>
+	<field name="cheque_number" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="cheque_number"/>
+		<property name="com.jaspersoft.studio.field.label" value="cheque_number"/>
+	</field>
+	<field name="card_number" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="card_number"/>
+		<property name="com.jaspersoft.studio.field.label" value="card_number"/>
+	</field>
+	<field name="upi_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="upi_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="upi_type"/>
+	</field>
+	<field name="transcation_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="transcation_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="transcation_id"/>
+	</field>
+	<field name="uhid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="uhid"/>
+		<property name="com.jaspersoft.studio.field.label" value="uhid"/>
+	</field>
+	<field name="age" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="age"/>
+		<property name="com.jaspersoft.studio.field.label" value="age"/>
+	</field>
+	<field name="gender" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="gender"/>
+		<property name="com.jaspersoft.studio.field.label" value="gender"/>
+	</field>
+	<field name="hospital_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="hospital_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="hospital_name"/>
+	</field>
+	<field name="hos_address" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="hos_address"/>
+		<property name="com.jaspersoft.studio.field.label" value="hos_address"/>
+	</field>
+	<field name="gst" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="gst"/>
+		<property name="com.jaspersoft.studio.field.label" value="gst"/>
+	</field>
+	<field name="reg" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="reg"/>
+		<property name="com.jaspersoft.studio.field.label" value="reg"/>
+	</field>
+	<field name="number_1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="number_1"/>
+		<property name="com.jaspersoft.studio.field.label" value="number_1"/>
+	</field>
+	<field name="number_2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="number_2"/>
+		<property name="com.jaspersoft.studio.field.label" value="number_2"/>
+	</field>
+	<field name="COLUMN_22" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="number_2"/>
+		<property name="com.jaspersoft.studio.field.label" value="number_2"/>
+	</field>
+	<field name="real_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="real_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="real_name"/>
+	</field>
+	<field name="ipd_No" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="ipd_No"/>
+		<property name="com.jaspersoft.studio.field.label" value="ipd_No"/>
+	</field>
+	<field name="recieved_from" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="recieved_from"/>
+		<property name="com.jaspersoft.studio.field.label" value="recieved_from"/>
+	</field>
+	<field name="doc_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="doc_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="doc_name"/>
+	</field>
+	<title>
+		<band height="394" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="6" width="680" height="1" uuid="5cef961b-bd9d-4cef-b981-f19cf265a90d"/>
+			</line>
+			<line>
+				<reportElement x="1" y="86" width="680" height="1" uuid="bf722a84-a980-4c77-bbe8-7d1045a94581"/>
+			</line>
+			<line>
+				<reportElement x="1" y="7" width="1" height="382" uuid="fd19f2ef-455e-4c6f-946e-80c604af6c38"/>
+			</line>
+			<line>
+				<reportElement x="682" y="6" width="1" height="386" uuid="a6bfc4a3-fe59-4780-a6be-d4455f6e1e03"/>
+			</line>
+			<line>
+				<reportElement x="2" y="118" width="680" height="1" uuid="6b3e37e2-d210-4ffe-9f7e-188e37c83410"/>
+			</line>
+			<staticText>
+				<reportElement x="17" y="150" width="99" height="30" uuid="5982fabb-dcce-4a65-a47a-764bfe8752cf"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="16" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Receipt NO :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="284" y="150" width="66" height="29" uuid="155feb9a-7782-43b7-b820-a5a5ad9d22bb"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[IPD No :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="506" y="149" width="54" height="30" uuid="ced58edd-4028-4d9c-ad9b-9099ab9afcf5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="186" width="196" height="30" uuid="0dd490d4-c385-480e-a8bf-22828d2ea32f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="16" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Recieve With Thanks from ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="217" width="196" height="30" uuid="349fc259-0857-43ed-bc93-699ad7d50e46"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="16" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Consultant Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="248" width="197" height="30" uuid="929128b3-758d-4721-ac36-07df99fce112"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="16" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Paid Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="279" width="197" height="30" uuid="ad3efe20-dc9f-4b92-acfc-a1e6ffd666a0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="16" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Payment Mode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="454" y="184" width="94" height="30" uuid="fa3b841f-6a2c-4fdd-9256-dcf80ee54296"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[UHID No :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="451" y="219" width="97" height="30" uuid="2da642d8-e161-44e7-8916-d72df1a504a8"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Age / Gender :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="259" width="97" height="30" uuid="16a6ea8b-bd8b-418b-b329-00b5650309bc"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Cr Card No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="354" width="32" height="30" uuid="d213f364-743d-43f0-9b2c-4ab2dfb6cedd"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rs]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="2" y="87" width="678" height="31" backcolor="#FFFF99" uuid="118baed5-9a9f-457c-93a7-8e5e4de919c9"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="240" y="90" width="213" height="23" uuid="45a15d88-0ed2-4efc-82d4-52de4dc7d82e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Cash Receipt]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="391" width="680" height="1" uuid="2d977035-bfd6-4934-8b2c-82858e9ec9ef"/>
+			</line>
+			<staticText>
+				<reportElement x="210" y="193" width="3" height="17" uuid="7415e7fc-1e36-4822-9397-7f139f82ebe1"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="224" width="3" height="17" uuid="a4acd0b6-70f9-4cc7-9865-94118809291e"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="256" width="3" height="17" uuid="27e9623a-ab5b-4ce8-bb67-8fdfa99e8741"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="285" width="3" height="17" uuid="fbbaa243-5bf9-45b8-b696-14e8ee50038a"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="116" y="151" width="114" height="30" uuid="c6bedafa-003e-4b29-ba8d-1653faade630"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{voucher_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="218" y="186" width="225" height="30" uuid="1578397b-bef3-46aa-a551-53fed7a13f06"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{recieved_from}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="218" y="218" width="225" height="30" uuid="84bf416d-f7eb-4a00-9606-a3d5413454ae"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{doc_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="218" y="250" width="225" height="30" uuid="d752b386-885b-4ce0-851c-c2627b9784ff"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{in_word}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="218" y="281" width="225" height="30" uuid="a59ae989-4e02-4158-9964-bf9b495b4bfb"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{paytype}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="550" y="184" width="127" height="30" uuid="dc457a20-7cf1-4bdf-9fb8-397948e7c39d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{uhid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="551" y="218" width="127" height="30" uuid="d68790f3-d1c8-42e5-a61c-19ce1ced4ee7"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[CONCATENATE($F{age},$F{gender})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="351" y="149" width="127" height="30" uuid="daa20f6f-209f-47ad-b2bd-4477d4142e39"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ipd_No}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="553" y="149" width="127" height="30" uuid="580212b7-7653-4161-9d79-ef8e1aed803a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payment_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="14" width="480" height="30" forecolor="#FF0000" uuid="35e69c0f-df5c-4e4a-a8e4-dcd8d055d3b6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Algerian" size="22" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hospital_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="81" y="49" width="480" height="30" forecolor="#000000" uuid="2dfab4c4-1973-42d2-80cb-c8649755490e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Rounded MT Bold" size="14" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hos_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="577" y="11" width="100" height="20" uuid="b69c5947-eab7-4e95-a906-b8e1c28d6130"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{number_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="577" y="31" width="99" height="18" uuid="04827ade-359d-46e1-bc1a-4db36eaf52a7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{number_2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="354" width="140" height="30" uuid="9270228f-d561-48f9-8216-4ee9d7772608"/>
+				<box>
+					<pen lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="478" y="360" width="100" height="30" uuid="33f5f88e-fba1-4adf-b2f3-e56b352ad53f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Prepared By :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="580" y="359" width="100" height="30" uuid="d1671a01-8aac-49da-8e82-13e57dc736df"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{real_name}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle" onErrorType="Icon">
+				<reportElement x="8" y="17" width="62" height="62" uuid="ccdeb7b2-510a-4c03-b786-4b1461cdbb12"/>
+			</image>
+		</band>
+	</title>
+</jasperReport>

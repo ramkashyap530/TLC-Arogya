@@ -1,0 +1,349 @@
+<%-- 
+    Document   : WMAS0004
+    Created on : 3 Feb, 2022, 3:00:14 PM
+    Author     : Tarun
+--%>
+
+<%@page import="OT.WOT0001_Dao"%>
+<%@page import="Laboratory.WLAB0001_dao"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+       <%@include file="../Design/All/All_css.jsp" %>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+          <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+          <script src="../Js/WOT0001Js.js"></script>
+    </head>
+    <body onload="ot_doctor();ot_staff();">
+     <div class="wrapper">
+        <%@include  file="../Master/Header_Menu.jsp" %>
+        <div id="content-page" class="content-page">
+            
+                        
+        <div class="container-fluid">
+             <form action="../../WOT0001_Serv" method="post" id="form1">  
+                 
+                 <input type="hidden" name="value" value="3">
+                                                     <input type="hidden" name="user" value="<%=Real_Name%>">
+                                                     <input type="hidden" name="company_code" value="<%=Hospital_code%>">
+               <div class="row">
+                  <div class="col-lg-3">
+                     <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                           <div class="iq-header-title">
+                              <h4 class="card-title">Assign OT</h4>
+                           </div>
+                            
+                        </div>
+                        <div class="iq-card-body">
+                         
+                              
+                              <div class="form-group">
+                                 <label>Patient Name</label>
+                                 <select class="form-control" id="selectuserrole" name="patient_id">
+                                    <option>Select</option>
+                                     <%
+                                        WOT0001_Dao st_1=new WOT0001_Dao();
+                                        ArrayList<String> data=st_1.getdata("1","");
+                                        for(String cd:data){
+                                            out.println(cd);
+                                        }
+                                        %>
+                                 </select>
+                                    
+                              </div>
+                                 
+                                 
+                                 
+                                 <div class="form-group">
+                                 <label>Operation Name</label>
+                                 <select class="form-control" id="selectuserrole" name="operation_name" required onchange="getRateOfOt(this.value);">
+                                    <option>Select</option>
+                                     <%
+                                        
+                                        data=st_1.getdata("2","");
+                                        for(String cd:data){
+                                            out.println(cd);
+                                        }
+                                        %>
+                                 </select>
+<!--                                 <input type="text" class="form-control" name="operation_name" >-->
+                                    
+                              </div>
+                                 
+                                 
+                                 <div class="form-group">
+                                 <label>Operation Date</label>
+                                 <input type="date" class="form-control" name="Ot_date">
+                                    
+                              </div>
+                                 
+                                 
+                                 <div class="form-group">
+                                 <label>Operation Time</label>
+                                 <input type="time" class="form-control" name="Ot_time">
+                                    
+                              </div>
+                            
+                         
+                 
+                          
+                        </div>
+                     </div>
+                  </div>
+                       </form>
+                      
+                                 
+                  <div class="col-lg-2">
+                     <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                           <div class="iq-header-title">
+                              <h4 class="card-title">Doctor</h4>
+                           </div>
+                        </div>
+                        <div class="iq-card-body">
+                           <div class="new-user-info">
+                              
+                              
+                                   
+                        <div class="table-responsive">
+                               <table class="table table-bordered table-responsive-md table-striped text-center">
+                                 <thead>
+                                    <tr>
+                                      
+                                      
+                                       <th><input type="checkbox"></th>
+                                        <th>Doctor</th>
+                                      
+                                    </tr>
+                                 </thead>
+                                 <tbody id="tbody">
+                                    
+                                    
+                                    
+                                    
+                                 </tbody>
+                              </table>
+                            </div>
+                                 
+                       
+                                 
+                            
+                           </div>
+                        
+                        </div>
+                        
+                     </div>
+                        
+                  </div>
+                                 
+                                 <div class="col-lg-2">
+                     <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                           <div class="iq-header-title">
+                              <h4 class="card-title">Staff</h4>
+                           </div>
+                        </div>
+                        <div class="iq-card-body">
+                           <div class="new-user-info">
+                              
+                              
+                                   
+                        <div class="table-responsive">
+                               <table class="table table-bordered table-responsive-md table-striped text-center">
+                                 <thead>
+                                    <tr>
+                                      
+                                      
+                                       <th><input type="checkbox"></th>
+                                       <th style="white-space: nowrap">Staff</th>
+                                      
+                                    </tr>
+                                 </thead>
+                                 <tbody id="tbody_staff">
+                                    
+                                    
+                                    
+                                    
+                                 </tbody>
+                              </table>
+                            </div>
+                                 
+                       
+                                 
+                            
+                           </div>
+                        
+                        </div>
+                        
+                     </div>
+                        
+                  </div>
+                        
+                      
+                        
+                                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <h5 class="modal-title" id="exampleModalCenterTitle">OT Total Amount</h5>
+                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                       <span aria-hidden="true">&times;</span>
+                                       </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    
+                                     <div class="row">
+                                         <div class="col-md-4">
+                                            <label>OT Amount </label>
+                                            <input type="text" readonly class="form-control" id="OT_Amount"  placeholder="" value='0' onkeyup="TotAmtOT();" name="OT_Amount">
+                                            </div>
+                                         
+                                         
+                                         
+                                         <div class="col-md-4">
+                                            <label>Paid</label>
+                                             <input type="text" class="form-control" id="Amount_paid" placeholder="" value='0' onkeyup="TotAmtOT();" name="Amount_paid">
+                                            </div>
+                                         
+                                         <div class="col-md-4">
+                                            <label>Pending</label>
+                                             <input type="text" readonly class="form-control" id="Amount_pending" placeholder="" name="Amount_pending">
+                                            </div>
+                                         
+                                         
+                                         <div class="col-md-12">
+                                            <label></label>
+                                             <center><button class="btn btn-sm btn-success mt-4">Pay</button></center>
+                                            </div>
+                                         
+                                         </div>
+                                      
+                                    </div>
+                                    <div class="modal-footer">
+                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                     
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                                 
+                                 
+                                   <div class="col-lg-4">
+                     <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                           <div class="iq-header-title">
+                              <h4 class="card-title">Selected</h4>
+                           </div>
+                            <button class="btn btn-success " type="button" data-toggle="modal" data-target="#exampleModalCenter" >Send To OT</button>
+                        </div>
+                        <div class="iq-card-body" id="doc_t">
+                           
+                        
+                        </div>
+                         
+                         <div class="iq-card-body" id="staff_t">
+                           
+                        
+                        </div>
+                        
+                     </div>
+                        
+                  </div>
+              
+                  
+                   
+                   
+               
+               </div>
+             </form> 
+                        
+                        
+                        
+                     </div>  
+                        
+                        
+                        
+                  </div>
+                        
+                        
+        <!--for salary advance--> 
+        
+        
+        
+        <!--ends here--> 
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            </div>
+        
+        
+        </div>
+         
+        
+              <%@include file='../Design/All/All_js.jsp'%>
+            <script src="../../Design/app-assets/js/scripts/forms/select/form-select2.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    
+     <%
+          
+           if(session.getAttribute("Alt_Data")!=null)
+           {
+               HashMap<String,String> altMap=(HashMap<String ,String>)session.getAttribute("Alt_Data");
+              
+            
+               %>
+               
+<script>swal("<%=altMap.get("Titel")%>", "<%=altMap.get("Alt_Msg")%>","<%=altMap.get("Alt_Type")%>");</script>
+<%
+                    session.removeAttribute("Alt_Data");
+                   
+           }
+  
+
+          
+          %>
+          
+          
+           <script>
+             $(function(){
+    var dtToday = new Date();
+    
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    
+    var maxDate = year + '-' + month + '-' + day;
+    
+    $('#txtDate').attr('max', maxDate);
+});
+
+
+
+
+              </script>
+              
+              
+             
+    </body>
+</html>

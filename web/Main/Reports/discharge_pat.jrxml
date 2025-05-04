@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="discharge_pat" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="32b32d34-da36-4311-8f05-cb861763cbfa">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Arogya_main"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="patient_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select  isnull(pd.patient_id,'')as patient_id,
+isnull(condition_on_discharge,'')as condition,
+isnull(vital_on_discharge,'')as vital,
+isnull(history_of_present_illeness,'')as history,
+isnull(format(created_date,'dd/MM/yyyy'),'')as dischage_date,
+isnull(patient_name,'')as patient_name,
+isnull(age,'')as age,
+isnull(gender,'')as gender,
+isnull(mip.address,'')as address,
+isnull(format(admision_date,'dd/MM/yyyy'),'')as admission_date,
+isnull(father_name,'')as father_name,
+isnull(hospital_name,'')as hospital_name,
+isnull(mh.address,'')as hos_address ,
+isnull(adhar,'')as adhar,
+isnull(ipd_no,'')as ipd,
+isnull(refer_doctor,'Self')as refer
+
+from patient_discharge pd left join mst_ipd_patient mip on pd.patient_id=mip.patient_id
+left join mst_hospital mh on mh.hospital_code=mip.hospital_code
+where mip.patient_id=$P{patient_id}
+]]>
+	</queryString>
+	<field name="patient_id" class="java.lang.String"/>
+	<field name="condition" class="java.lang.String"/>
+	<field name="vital" class="java.lang.String"/>
+	<field name="history" class="java.lang.String"/>
+	<field name="dischage_date" class="java.lang.String"/>
+	<field name="patient_name" class="java.lang.String"/>
+	<field name="age" class="java.lang.String"/>
+	<field name="gender" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="admission_date" class="java.lang.String"/>
+	<field name="father_name" class="java.lang.String"/>
+	<field name="hospital_name" class="java.lang.String"/>
+	<field name="hos_address" class="java.lang.String"/>
+	<field name="adhar" class="java.lang.String"/>
+	<field name="ipd" class="java.lang.String"/>
+	<field name="refer" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="450" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="544" height="1" uuid="272f5934-95e1-46c5-8bd0-ebfcd810d341"/>
+			</line>
+			<line>
+				<reportElement x="543" y="0" width="1" height="450" uuid="c368d9bd-7bf5-4205-910c-6d561038309a"/>
+			</line>
+			<line>
+				<reportElement x="-1" y="449" width="544" height="1" uuid="facaf925-7a74-4954-bc04-a07d42758453"/>
+			</line>
+			<line>
+				<reportElement x="-2" y="-1" width="1" height="450" uuid="8ec10d8a-f8b7-4d0b-83ed-f45645a21745"/>
+			</line>
+			<line>
+				<reportElement x="0" y="79" width="544" height="1" uuid="e0119a63-193c-494a-8e80-094eabfa7e25"/>
+			</line>
+			<rectangle>
+				<reportElement x="0" y="1" width="543" height="76" forecolor="#FFFFFF" backcolor="#FFCC00" uuid="9d846bda-33cb-448a-bd72-286542d1fd62"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="80" width="543" height="30" uuid="b5120784-df80-497b-bc11-0dde9eda48d8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Discharge Summary]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="129" width="100" height="30" uuid="f049c4f2-ae02-4bc1-890a-5a0627bd20cc"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Patient Name :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="159" width="100" height="30" uuid="c78771d3-0bfc-456a-99ca-8d857ddef2db"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Adhar No :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="189" width="100" height="30" uuid="0f67a876-06cc-44b0-8c82-1aadc2e16bad"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Address :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="219" width="100" height="30" uuid="40b643e0-2484-4195-ae17-7c8c7d5aa0c6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Blood Group :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="249" width="100" height="30" uuid="70a577e0-e6d1-41c3-951f-304de72d924d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Procedures]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="304" width="181" height="30" uuid="c221f3a0-3c07-4723-be50-68061ea94595"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[History Of Present Illness :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="236" y="131" width="70" height="30" uuid="6e3f5a45-c2e3-4ef0-b5b5-1ac8f3d5b9dd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Age & Sex :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="391" y="129" width="75" height="30" uuid="d23ca6b8-9de9-4e27-bd94-72babd38496f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Father Name :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="239" y="167" width="41" height="30" uuid="74140474-5dc8-457e-8605-c8ad3fc79cdb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DOA :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="167" width="41" height="30" uuid="ad42615b-44c6-469e-ae42-429f1e3dc0eb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DOD :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="199" width="46" height="30" uuid="2d3c4e99-7c2a-4c17-8bf4-fbc45f347191"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IPD NO :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="230" width="86" height="30" uuid="24e7dd19-0b18-431d-8485-cf30618c868e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reffered By ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="359" width="76" height="30" uuid="5450315d-182e-4c7d-9361-3788ccb72a79"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diagonisis :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="389" width="165" height="30" uuid="a0f3cfea-305e-4a8f-8b02-5e1448bc1e2b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Condition On Discharge]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="11" width="440" height="30" uuid="e3b2c8e1-f464-4cfe-a6da-f5b641043b36"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hospital_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="44" width="440" height="30" uuid="214dac65-cea6-45e7-9f19-937c23c95cec"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hos_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="101" y="129" width="100" height="30" uuid="14177796-7706-48b9-80ee-9f26eb148e2d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{patient_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="308" y="131" width="78" height="28" uuid="55fef7f4-a0cc-451b-9fb1-8b530daef239"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gender}+'/'+$F{age}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="129" width="72" height="30" uuid="2067124e-b49b-4e63-bdb1-91e0ae6dbdc8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{father_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="102" y="162" width="100" height="30" uuid="d33076e1-1670-4f04-a9f8-93da182854a1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{adhar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="102" y="192" width="100" height="30" uuid="6690cbbd-98fa-4aeb-b538-5149081acee5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="299" width="363" height="36" uuid="26a242ee-dd12-4449-a41a-98b0746d5392"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{history}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="390" width="100" height="30" uuid="da7b89e1-0746-4ab7-adc8-f3c666e08772"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{condition}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="167" width="106" height="25" uuid="53c9f259-b097-49be-aca0-ea6f75873c42"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{admission_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="436" y="168" width="106" height="25" uuid="cbb8182b-9f50-4f50-b73e-0f7d208e32be"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dischage_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="443" y="199" width="99" height="25" uuid="5c7ae0f2-a6cc-4d4e-85ed-276e49e2fbef"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ipd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="448" y="231" width="94" height="25" uuid="633e7180-83e9-4536-84d0-75e5ff8559e9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{refer}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="419" width="119" height="30" uuid="d8212058-1880-4282-9e56-d8560a990185"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VItal On Discharge]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="420" width="100" height="29" uuid="e7310153-b377-4706-a0a6-8b51afcc1f26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vital}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

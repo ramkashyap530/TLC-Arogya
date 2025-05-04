@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Med_prec" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Agrogya"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="315"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="674"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#EEEFF0"/>
+		</conditionalStyle>
+	</style>
+	<style name="Table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<leftPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+			<rightPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#CACED0">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#D8D8D8"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="tableDataset" uuid="f13e6d36-5148-4ecc-bbe3-3035def80980">
+		<parameter name="Parameter1" class="java.lang.String"/>
+		<parameter name="Parameter2" class="java.lang.String"/>
+		<parameter name="Parameter3" class="java.lang.String"/>
+		<parameter name="Parameter4" class="java.lang.String"/>
+		<parameter name="Parameter5" class="java.lang.String"/>
+		<parameter name="Parameter6" class="java.lang.String"/>
+		<parameter name="Parameter7" class="java.lang.String"/>
+		<parameter name="Parameter10" class="java.lang.String"/>
+		<parameter name="OPD_ID" class="java.lang.String">
+			<parameterDescription><![CDATA[OPD_ID]]></parameterDescription>
+			<defaultValueExpression><![CDATA[$P{OPD_ID}]]></defaultValueExpression>
+		</parameter>
+		<parameter name="Parameter8" class="java.lang.String"/>
+		<parameter name="Parameter9" class="java.lang.String"/>
+		<parameter name="Parameter11" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="OPD_ID" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[
+select
+   isnull(mo.opd_id,'')as opd_id,
+isnull(age,'')as age, isnull(hospital_registration,'')as hospital_registration,
+isnull(specialist,'')as specialist,isnull(degree,'')as degree,
+isnull(mdc.mobile_number,'')as doc_mob_num,
+isnull(medicine_name,'')as medicine_name,isnull(dosage,'')as dosage,
+isnull (Additional_comments,'')as Additional_comments,isnull(CONCAT(doc_name_first,'',doc_name_last),'')as doc_name,
+ isnull(test_name,'')as Test_name,
+isnull(comments,'')as comments,
+isnull(hospital_name,'')as hospital_name,
+isnull(mh.address,'')as hospital_address,
+isnull(diagonsis,'')as diagonsis,
+isnull(patient_name,'')as patient_name,
+isnull(next_visit_date,'')as next_visit_date,
+isnull(mh.number_1,'')hospital_number_1,
+isnull(mh.number_1,'')hospital_number_2
+from mst_medicine md
+inner join mst_opd mo on mo.opd_id=md.opd_id
+inner join mst_test_prec mtp on md.opd_id=mtp.opd_id
+inner join preciption_id pd on md.opd_id=pd.opd_id
+inner join mst_hospital mh on mh.hospital_code=md.hospital_code
+inner join mst_doctor mdc on mdc.Doc_code=mo.doc_code
+where md.opd_id=$P{OPD_ID}]]>
+	</queryString>
+	<field name="opd_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="opd_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="opd_id"/>
+	</field>
+	<field name="age" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="age"/>
+		<property name="com.jaspersoft.studio.field.label" value="age"/>
+	</field>
+	<field name="hospital_registration" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="hospital_registration"/>
+		<property name="com.jaspersoft.studio.field.label" value="hospital_registration"/>
+	</field>
+	<field name="specialist" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="specialist"/>
+		<property name="com.jaspersoft.studio.field.label" value="specialist"/>
+	</field>
+	<field name="degree" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="degree"/>
+		<property name="com.jaspersoft.studio.field.label" value="degree"/>
+	</field>
+	<field name="doc_mob_num" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="doc_mob_num"/>
+		<property name="com.jaspersoft.studio.field.label" value="doc_mob_num"/>
+	</field>
+	<field name="medicine_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="medicine_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="medicine_name"/>
+	</field>
+	<field name="dosage" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="dosage"/>
+		<property name="com.jaspersoft.studio.field.label" value="dosage"/>
+	</field>
+	<field name="Additional_comments" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Additional_comments"/>
+		<property name="com.jaspersoft.studio.field.label" value="Additional_comments"/>
+	</field>
+	<field name="doc_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="doc_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="doc_name"/>
+	</field>
+	<field name="Test_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Test_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="Test_name"/>
+	</field>
+	<field name="comments" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="comments"/>
+		<property name="com.jaspersoft.studio.field.label" value="comments"/>
+	</field>
+	<field name="hospital_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="hospital_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="hospital_name"/>
+	</field>
+	<field name="hospital_address" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="hospital_address"/>
+		<property name="com.jaspersoft.studio.field.label" value="hospital_address"/>
+	</field>
+	<field name="diagonsis" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="diagonsis"/>
+		<property name="com.jaspersoft.studio.field.label" value="diagonsis"/>
+	</field>
+	<field name="patient_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="patient_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="patient_name"/>
+	</field>
+	<field name="next_visit_date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="next_visit_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="next_visit_date"/>
+	</field>
+	<field name="hospital_number_1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="hospital_number_1"/>
+		<property name="com.jaspersoft.studio.field.label" value="hospital_number_1"/>
+	</field>
+	<field name="hospital_number_2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="hospital_number_2"/>
+		<property name="com.jaspersoft.studio.field.label" value="hospital_number_2"/>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="220" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="80" width="556" height="1" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<image hAlign="Center">
+				<reportElement x="3" y="9" width="65" height="60" uuid="94883631-a913-43e2-b182-ab8d77d0181e"/>
+				<imageExpression><![CDATA["invoice_logo.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="-1" y="0" width="1" height="215" uuid="be487f06-88a8-4cee-88c9-88122254c8e1"/>
+			</line>
+			<line>
+				<reportElement x="555" y="0" width="1" height="215" uuid="47566269-8de4-4c5b-a37f-15d865a562b6"/>
+			</line>
+			<line>
+				<reportElement x="1" y="0" width="555" height="1" uuid="bf03297c-4ac4-4d65-b7a5-fa4e5a13b81d"/>
+			</line>
+			<line>
+				<reportElement x="0" y="141" width="556" height="1" uuid="0e97a37c-ab72-4931-98f8-8a4bc25f3adf">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="90" y="142" width="1" height="74" uuid="ce3a2bd3-216b-46b6-8c1d-93887d7c0dd1"/>
+			</line>
+			<line>
+				<reportElement x="-1" y="216" width="557" height="1" uuid="a899b799-a6ba-4db1-aa0f-27b863c90e3f">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement x="81" y="1" width="349" height="30" backcolor="#FFFFFF" uuid="08a034c1-23f9-4378-9b50-5aed2bbc950c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Algerian" size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hospital_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="84" y="37" width="300" height="30" uuid="ff7aed99-4424-4711-a88a-8150148e7350"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hospital_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="1" width="125" height="19" uuid="f26efaab-4d83-4255-9293-67db9688ed42"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hospital_registration}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="83" width="242" height="27" forecolor="#FF3333" uuid="e93ee3f5-02d3-42e2-9679-dc8250d8caf6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Algerian" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{doc_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="84" width="57" height="24" uuid="1ddc87a1-a2b9-4ce7-a938-38d57d7f2737"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DR.:-]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="68" y="112" width="242" height="27" forecolor="#FF3333" uuid="c1e4a6ed-7b30-40a6-8030-61a68e6fee7c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Algerian" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{degree}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="100" y="150" width="100" height="20" uuid="b64f372d-5983-47a2-a826-788a02870b19"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Black" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Patient Name:-]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="200" y="150" width="160" height="20" uuid="236e54f8-f117-4cde-8d04-ff66098ae5dd"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{patient_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="105" y="182" width="439" height="30" uuid="265e40aa-683e-4b67-b6f5-b55efbc0c970"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{diagonsis}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="1" y="143" width="88" height="72" uuid="0758a1dd-80c5-4aa2-92c9-278246ae0d32"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA[$P{OPD_ID}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+			<staticText>
+				<reportElement x="437" y="152" width="40" height="20" uuid="0603981b-d5ab-4f97-9d6f-03160b138a90"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Black" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[AGE:-]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="477" y="153" width="30" height="19" uuid="151bd588-d5f1-40ae-a1da-9bde7c7b081a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{age}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="25">
+			<textField>
+				<reportElement x="89" y="3" width="99" height="15" uuid="0e5b42a3-6dbf-448a-ac9c-42f9cbf9655c"/>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{medicine_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="188" y="4" width="50" height="15" uuid="6dd0fec1-94c0-4130-95cd-ed532bd146a3"/>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dosage}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="238" y="4" width="116" height="15" uuid="95a5afb6-a7e2-4114-89ce-14551b595eea"/>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Additional_comments}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="3" width="110" height="16" uuid="8bb74af0-4878-4ab8-b07a-f00165698ff1"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Test_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="44">
+			<staticText>
+				<reportElement x="3" y="7" width="237" height="23" uuid="547ada8c-417d-40af-8e9a-8db5b4fde004"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[NOT FOR MEDICO LEGAL PURPOSES]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="7" width="555" height="1" uuid="8af7103b-67be-4dab-8075-b0bbf781196b"/>
+			</line>
+			<line>
+				<reportElement x="-2" y="34" width="556" height="1" uuid="202e260f-4fce-4c14-8565-c2864a08d038"/>
+			</line>
+			<line>
+				<reportElement x="555" y="-550" width="1" height="582" uuid="a13c4bab-b932-45ec-9569-caf06340bc66"/>
+			</line>
+			<line>
+				<reportElement x="-1" y="-545" width="1" height="582" uuid="205390a6-ac92-41b4-a5c9-6779c55712c7"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>
